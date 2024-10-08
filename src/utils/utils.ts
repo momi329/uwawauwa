@@ -1,4 +1,21 @@
 // ====================================================================================
+//                              Question 1
+// ====================================================================================
+
+// 請根據如下條件實作使用正規表達式將數字加上千分位的 function
+// ○ function name: addComma
+// ○ function input : -7855948.9527
+// ○ function output: -7,855,948.9527
+
+export const addComma = (num: number) => {
+  const [integer, decimal] = num.toString().split(".");
+  console.log({ integer, decimal });
+  const formatNum = integer.replace(/(-?\d)(?=(\d{3})+(?!\d))/g, "$1,");
+
+  return decimal ? `${formatNum}.${decimal}` : formatNum;
+};
+
+// ====================================================================================
 //                              Question 2
 // ====================================================================================
 
