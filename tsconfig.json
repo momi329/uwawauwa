@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "es5", // 目標設置為 ES5 以兼容更舊的瀏覽器
+    "lib": ["dom", "dom.iterable", "esnext"], // 支援 DOM、迭代器和 ESNext 相關特性
+    "allowJs": false, // 禁用 JavaScript 檔案
+    "skipLibCheck": true, // 跳過型別檢查，以加速編譯
+    "esModuleInterop": true, // 啟用 ES 模組和 CommonJS 模組的互操作
+    "allowSyntheticDefaultImports": true, // 允許從模組中匯入默認匯出，即使沒有設置
+    "strict": true, // 啟用所有嚴格型別檢查選項
+    "forceConsistentCasingInFileNames": true, // 強制一致的文件名大小寫
+    "noFallthroughCasesInSwitch": true, // 阻止 switch 語句中的 case 語句失效
+    "module": "esnext", // 使用下一代 ECMAScript 模組
+    "moduleResolution": "node", // 使用 Node 模組解析方式
+    "resolveJsonModule": true, // 支援匯入 JSON 檔案
+    "isolatedModules": true, // 每個文件作為一個模組單獨處理
+    "jsx": "react-jsx" // 使用 React 17 以後的新 JSX 轉換方式
+  },
+  "include": ["src"] // 包含 src 資料夾中的所有 TypeScript 和 JavaScript 檔案
+}
