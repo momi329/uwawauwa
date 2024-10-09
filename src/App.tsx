@@ -1,4 +1,4 @@
-import { PriceInput } from "./ui/Input";
+import { PriceInput } from "./components/PriceInput";
 
 function App() {
   return (
