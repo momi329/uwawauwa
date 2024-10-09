@@ -7,10 +7,14 @@
 // ○ function input : -7855948.9527
 // ○ function output: -7,855,948.9527
 
-export const addComma = (num: number) => {
+export const addComma = (num: string) => {
   const [integer, decimal] = num.toString().split(".");
   const formatNum = integer.replace(/(-?\d)(?=(\d{3})+(?!\d))/g, "$1,");
 
+  if (decimal !== undefined) {
+    return decimal === '' ? `${formatNum}.` : `${formatNum}.${decimal}`;
+  }
+  
   return decimal ? `${formatNum}.${decimal}` : formatNum;
 };
 
