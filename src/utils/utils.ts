@@ -9,7 +9,6 @@
 
 export const addComma = (num: number) => {
   const [integer, decimal] = num.toString().split(".");
-  console.log({ integer, decimal });
   const formatNum = integer.replace(/(-?\d)(?=(\d{3})+(?!\d))/g, "$1,");
 
   return decimal ? `${formatNum}.${decimal}` : formatNum;
@@ -68,5 +67,24 @@ export const getNumberIntervals = (
   return {
     overlap,
     notInclude,
+  };
+};
+
+// ====================================================================================
+//                             debounce
+// ====================================================================================
+export const debounce = <T extends unknown[]>(
+  fn: (...args: T) => void,
+  wait = 3000
+) => {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+
+  return (...args: T) => {
+    if (timer) {
+      clearTimeout(timer);
+    }
+    timer = setTimeout(() => {
+      fn(...args);
+    }, wait);
   };
 };

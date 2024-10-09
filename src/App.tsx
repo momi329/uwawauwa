@@ -1,5 +1,12 @@
+import { PriceInput } from "./ui/Input";
+
 function App() {
-  return <div>helloworld</div>;
+  return (
+    <div>
+      <PriceInput />
+      helloworld
+    </div>
+  );
 }
 
 export default App;
