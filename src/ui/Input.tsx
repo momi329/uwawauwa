@@ -1,4 +1,5 @@
 import type React from "react";
+import type { errorMsgType } from "../components/PriceInput";
 import { cn } from "../helper/cn";
 
 type InputProps = React.ComponentPropsWithoutRef<"input"> & {
@@ -10,6 +11,7 @@ type InputProps = React.ComponentPropsWithoutRef<"input"> & {
 export const Input = ({
   type = "text",
   curr = "TWD",
+  placeholder = "",
   name,
   label,
   value,
@@ -20,30 +22,26 @@ export const Input = ({
   ...props
 }: InputProps) => {
   return (
-    <div
-      className={cn(
-        "w-[250px] bg-pink-200 h-19 flex flex-col items-start ",
-        className
-      )}
-    >
-      <label htmlFor={name} className="text-xs h-1/4 ">
+    <>
+      <label htmlFor={name} className="text-xs h-1/4 text-gray-500 pb-1">
         {label}
       </label>
       <div
-        className="h-3/4 w-full rounded border border-gray-500 text-gray-600 
-      flex flex-row flex-grow"
+        className="h-12 w-full rounded border border-gray-300 text-gray-500
+      flex flex-row "
       >
         <div
-          className=" w-10 min-h-full bg-gray-300 rounded-l 
+          className=" w-16 h-full bg-gray-200 rounded-l 
         text-xs flex items-center justify-center "
         >
           {curr}
         </div>
         <input
           className={cn(
-            "flex-grow  p-2 size-full rounded-r outline-1 ",
-            errorMsg && "border-orange-300"
+            "  p-2 size-full rounded-r outline-1 placeholder:text-sm",
+            errorMsg && "border-[#F78E70]"
           )}
+          placeholder={placeholder}
           type={type}
           name={name}
           value={value}
@@ -51,9 +49,15 @@ export const Input = ({
           {...props}
         />
       </div>
-      <div className="text-xs bg-orange-100 p-1 rounded-b w-full text-orange-600">
-        {errorMsg}
-      </div>
+    </>
+  );
+};
+
+export const InputError = ({ errorMsg }: { errorMsg: errorMsgType }) => {
+  if (!errorMsg.isError) return null;
+  return (
+    <div className="min-h-6 h-fit rounded text-xs bg-[#F8EAE7] px-2 py-1 rounded-b w-full text-orange-600">
+      {errorMsg.msg}
     </div>
   );
 };
