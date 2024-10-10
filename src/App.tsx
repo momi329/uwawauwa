@@ -1,9 +1,13 @@
-import { PriceInput } from "./components/PriceInput";
+import { AgeGroupPriceList } from "./components/AgeGroupPriceList";
 
 function App() {
   return (
-    <div>
-      <PriceInput />
+    <div className="flex flex-col gap-2 p-2  ">
+      <AgeGroupPriceList
+        onChange={(result) => {
+          console.log(result);
+        }}
+      />
     </div>
   );
 }
