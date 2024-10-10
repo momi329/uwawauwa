@@ -1,11 +1,7 @@
 import { useState } from "react";
-import { Input, InputError } from "../ui/Input";
+import { FormError } from "../ui/FromError";
+import { Input } from "../ui/Input";
 import { addComma } from "../utils/utils";
-
-export type errorMsgType = {
-  isError: boolean;
-  msg: string;
-};
 
 export const PriceInput = () => {
   const [value, setValue] = useState("0");
@@ -25,8 +21,8 @@ export const PriceInput = () => {
 
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value;
-    const isDemicalTyping = val.endsWith(".");
-    if (isDemicalTyping) {
+    const isDecimalTyping = val.endsWith(".");
+    if (isDecimalTyping) {
       val = val.slice(0, -1);
     }
     if (val === "") {
@@ -36,7 +32,7 @@ export const PriceInput = () => {
   };
 
   return (
-    <div className="w-[280px] h-fit flex flex-col items-start p-1">
+    <div className="min-w-[280px] h-fit flex flex-col items-start p-1">
       <Input
         name=""
         type="text"
@@ -46,7 +42,7 @@ export const PriceInput = () => {
         onChange={handleInputChange}
         onBlur={handleBlur}
       />
-      <InputError errorMsg={errorMsg} />
+      <FormError errorMsg={errorMsg} />
       <div className="text-xs text-gray-500 ml-auto">輸入0表示免費</div>
     </div>
   );

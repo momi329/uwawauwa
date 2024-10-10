@@ -1,11 +1,13 @@
 import type React from "react";
-import type { errorMsgType } from "../components/PriceInput";
 import { cn } from "../helper/cn";
+
+import { Label } from "./Label";
 
 type InputProps = React.ComponentPropsWithoutRef<"input"> & {
   label: string;
   curr?: string;
   errorMsg?: string;
+  name: string;
 };
 
 export const Input = ({
@@ -23,11 +25,9 @@ export const Input = ({
 }: InputProps) => {
   return (
     <>
-      <label htmlFor={name} className="text-xs h-1/4 text-gray-500 pb-1">
-        {label}
-      </label>
+      <Label label={label} name={name} />
       <div
-        className="h-12 w-full rounded border border-gray-300 text-gray-500
+        className="h-10 w-full rounded border border-gray-300 text-gray-500
       flex flex-row "
       >
         <div
@@ -50,14 +50,5 @@ export const Input = ({
         />
       </div>
     </>
-  );
-};
-
-export const InputError = ({ errorMsg }: { errorMsg: errorMsgType }) => {
-  if (!errorMsg.isError) return null;
-  return (
-    <div className="min-h-6 h-fit rounded text-xs bg-[#F8EAE7] px-2 py-1 rounded-b w-full text-orange-600">
-      {errorMsg.msg}
-    </div>
   );
 };
