@@ -1,6 +1,8 @@
 import { AGE_RANGE_MAX, AGE_RANGE_MIN } from "../constants";
 
 export const addComma = (num: string) => {
+  if (num === "") return "";
+
   const [integer, decimal] = num.toString().split(".");
   const formatNum = integer.replace(/(-?\d)(?=(\d{3})+(?!\d))/g, "$1,");
 
@@ -12,11 +14,11 @@ export const addComma = (num: string) => {
 };
 
 export const getNumberIntervals = (
-  input: number[][],
+  input: [number, number][],
   { max = AGE_RANGE_MAX, min = AGE_RANGE_MIN }
 ) => {
-  const overlap: number[][] = [];
-  const notInclude: number[][] = [];
+  const overlap: [number, number][] = [];
+  const notInclude: [number, number][] = [];
 
   // 用來記錄是否重疊
   const memoryArr = Array.from({ length: max - min + 1 }).fill(0) as number[];
@@ -56,4 +58,8 @@ export const getNumberIntervals = (
     overlap,
     notInclude,
   };
+};
+
+export const removeComma = (num: string) => {
+  return num.replace(/,/g, "");
 };
