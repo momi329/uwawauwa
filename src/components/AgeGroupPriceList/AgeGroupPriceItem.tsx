@@ -1,5 +1,6 @@
 import { Controller, FieldErrors, useFormContext } from "react-hook-form";
 import { ResultType } from ".";
+import { AGE_RANGE_MAX, AGE_RANGE_MIN } from "../../constants";
 import { getNumberIntervals } from "../../utils/utils";
 import { AgeGroupSelect } from "./AgeGroupSelect";
 import { FormError } from "./FormError";
@@ -20,7 +21,7 @@ export const AgeGroupPriceItem = ({ index }: { index: number }) => {
   const validateOverlap = (value: [number, number]) => {
     const { overlap } = getNumberIntervals(
       getValues("AgeGroupPriceList").map((item: ResultType) => item.ageGroup),
-      { max: 20, min: 0 }
+      { max: AGE_RANGE_MAX, min: AGE_RANGE_MIN }
     );
 
     const isOverlap = (minValue: number, maxValue: number) => {
@@ -54,8 +55,8 @@ export const AgeGroupPriceItem = ({ index }: { index: number }) => {
             render={({ field: { onChange } }) => (
               <>
                 <AgeGroupSelect
-                  min={0}
-                  max={20}
+                  min={AGE_RANGE_MIN}
+                  max={AGE_RANGE_MAX}
                   label="年齡"
                   isError={!!fieldErrors?.ageGroup?.message}
                   onChange={(value) => {

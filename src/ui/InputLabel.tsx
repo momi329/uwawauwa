@@ -10,7 +10,7 @@ type InputProps = React.ComponentPropsWithoutRef<"input"> & {
   name: string;
 };
 
-export const Input = ({
+export const InputLabel = ({
   type = "text",
   curr = "TWD",
   placeholder = "",
@@ -38,7 +38,7 @@ export const Input = ({
         </div>
         <input
           className={cn(
-            " p-2 size-full rounded-r outline-1 placeholder:text-sm border border-gray-300 focus:bg-zinc-50",
+            " p-2 size-full rounded-r outline-1 placeholder:text-sm border border-gray-300 focus:bg-zinc-100",
             { " border-[#F78E70]": isError }
           )}
           placeholder={placeholder}

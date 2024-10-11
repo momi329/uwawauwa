@@ -27,7 +27,7 @@ export const Select = ({
         {...props}
       >
         {selectOptions.map((option) => (
-          <option key={option} value={option} className="">
+          <option key={option} value={option}>
             {option}
           </option>
         ))}

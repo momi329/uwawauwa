@@ -1,4 +1,5 @@
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { AGE_RANGE_MAX, AGE_RANGE_MIN } from "../../constants";
 import { getNumberIntervals } from "../../utils/utils";
 import { AgeGroupPriceItem } from "./AgeGroupPriceItem";
 import { AppendButton } from "./AppendButton";
@@ -15,7 +16,11 @@ export type ResultType = {
 
 export const AgeGroupPriceList = ({ onChange }: AgeGroupPriceListProps) => {
   const methods = useForm<{ AgeGroupPriceList: ResultType[] }>({
-    defaultValues: { AgeGroupPriceList: [{ ageGroup: [0, 20], price: "0" }] },
+    defaultValues: {
+      AgeGroupPriceList: [
+        { ageGroup: [AGE_RANGE_MIN, AGE_RANGE_MAX], price: "0" },
+      ],
+    },
     mode: "onChange",
   });
 
@@ -28,7 +33,7 @@ export const AgeGroupPriceList = ({ onChange }: AgeGroupPriceListProps) => {
 
   const { notInclude } = getNumberIntervals(
     getValues("AgeGroupPriceList").map((item) => item.ageGroup),
-    { max: 20, min: 0 }
+    { max: AGE_RANGE_MAX, min: AGE_RANGE_MIN }
   );
 
   const isDisabled = notInclude.length === 0;
@@ -50,7 +55,9 @@ export const AgeGroupPriceList = ({ onChange }: AgeGroupPriceListProps) => {
         ))}
       </form>
       <AppendButton
-        onClick={() => append({ ageGroup: [0, 20], price: "0" })}
+        onClick={() =>
+          append({ ageGroup: [AGE_RANGE_MIN, AGE_RANGE_MAX], price: "0" })
+        }
         disabled={isDisabled}
       />
     </FormProvider>

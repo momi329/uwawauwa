@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Input } from "../../ui/Input";
+import { InputLabel } from "../../ui/InputLabel";
 import { addComma } from "../../utils/utils";
 type PriceInputProps = {
   isError: boolean;
@@ -23,12 +23,12 @@ export const PriceInput = ({ isError, onChange, name }: PriceInputProps) => {
 
   const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value;
-    // 如果輸入的是小數點，則移除小數點
+    // 如果最後結尾是小數點，移除小數點
     const isDecimalTyping = val.endsWith(".");
     if (isDecimalTyping) {
       val = val.slice(0, -1);
     }
-    // 移除開頭的0
+    // 如果最後開頭是0，移除開頭的0
     val = val.replace(/^0+(?=\d)/, "");
     setValue(addComma(val));
   };
@@ -39,7 +39,7 @@ export const PriceInput = ({ isError, onChange, name }: PriceInputProps) => {
   }, [value, onChange]);
 
   return (
-    <Input
+    <InputLabel
       name={name}
       type="text"
       label="入住費用(每人每晚)"
