@@ -1,70 +1,55 @@
-# Getting Started with Create React App
+## uwawauwa
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+專案使用 [Create React App](https://github.com/facebook/create-react-app) 創建，使用 `React`、`TypeScript`、`Tailwind CSS`
 
-## Available Scripts
+## 啟動專案
 
-In the project directory, you can run:
+1. `npm install -g pnpm` - 透過指令安裝 pnpm
+2. `pnpm i` - 安裝依賴
+3. `pnpm start` - 在開發模式啟動本地端專案
+   在 [http://localhost:3000](http://localhost:3000) 打開專案
+4. `pnpm test` - 進行 `addComma` 和 `getNumberIntervals` 兩支檔案的單元測試
 
-### `npm start`
+## 說明
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### 關於測驗
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+做完驚覺不確定能否使用 `react-hook-form`😫
+但如果要不使用套件實作的話我可能參考 `react-hook-form` 的設計架構實作
 
-### `npm test`
+- 使用 `useContext` 來集中管理和記錄 表單 `state` 和 `errors`
+- 在表單 onChange 時及時驗證資料，並將 `errors` 即時更新到 `context` 上
+- 動態新增/刪除表單時將資料模板新增/刪除到表單的 `state` 和 `errors` 中
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 基本功能
 
-### `npm run build`
+#### 🍀 [addComma](https://github.com/momi329/uwawauwa/blob/main/src/utils/utils.ts)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 將數字轉換成千分位
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+#### 🍀 [getNumberIntervals](https://github.com/momi329/uwawauwa/blob/main/src/utils/utils.ts)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 接受年齡區間陣列列表，返回重疊＆不重疊的年齡區間
 
-### `npm run eject`
+#### 🍀 [PriceInput](https://github.com/momi329/uwawauwa/blob/main/src/components/AgeGroupPriceList/PriceInput.tsx)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- 顯示票價輸入元件，輸入時自動換成千分位
+- 針對打字到一半不被干擾的特殊情況使用 `onBlur` 時會將結果為小數點 & 0 開頭的結果做處理
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### 🍀 [AgeGroupSelect](https://github.com/momi329/uwawauwa/blob/main/src/utils/utils.ts)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- 顯示年齡區間元件
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+#### 🌼 [AgeGroupPriceItem](https://github.com/momi329/uwawauwa/blob/main/src/components/AgeGroupPriceList/AgeGroupPriceItem.tsx)
 
-## Learn More
+- 顯示 單一 年齡區間&票價元件
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### 🍀 [AgeGroupPriceList](https://github.com/momi329/uwawauwa/blob/main/src/components/AgeGroupPriceList/index.tsx)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 顯示所有年齡區間的票價列表
+- 如果年齡區間重疊會出現錯誤訊息
+- `onChange` 時會通過 `react-hook-form` 驗證並顯示 errors，驗證規則則寫在元件內
+- 沒有限制筆數上限
+- 滿足所有須間會 disable 按鈕
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Demo
