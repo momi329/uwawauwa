@@ -1,6 +1,8 @@
 ## uwawauwa
 
-專案使用 [Create React App](https://github.com/facebook/create-react-app) 創建，使用 `React`、`TypeScript`、`Tailwind CSS`
+專案使用 [Create React App](https://github.com/facebook/create-react-app) 創建，使用 `React`、`TypeScript`、`Tailwind CSS`和 `react-hook-from`
+
+[My site 🔗](https://uwawauwa-momi329s-projects.vercel.app/)
 
 ## 啟動專案
 
