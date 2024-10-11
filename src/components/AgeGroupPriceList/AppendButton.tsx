@@ -1,4 +1,4 @@
-import { cn } from "../../helper/cn";
+import { cn } from "../../lib/cn";
 
 export const AppendButton = ({
   onClick,

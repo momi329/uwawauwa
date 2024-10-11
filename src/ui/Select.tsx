@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { cn } from "../helper/cn";
+import { cn } from "../lib/cn";
 import { ChevronDownIcon } from "./icons/ChevronDownIcon";
 
 type SelectProps = React.ComponentPropsWithoutRef<"select"> & {

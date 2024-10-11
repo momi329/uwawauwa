@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { cn } from "../../helper/cn";
+import { cn } from "../../lib/cn";
 import { Label } from "../../ui/Label";
 import { Select } from "../../ui/Select";
 

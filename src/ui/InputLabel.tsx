@@ -1,5 +1,5 @@
 import type React from "react";
-import { cn } from "../helper/cn";
+import { cn } from "../lib/cn";
 
 import { Label } from "./Label";
 
