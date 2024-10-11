@@ -17,11 +17,12 @@
 #### 關於測驗
 
 做完驚覺不確定能否使用 `react-hook-form`😫
-但如果要不使用套件實作的話我可能參考 `react-hook-form` 的設計架構實作
+如果要自行實作表單的話，依據是否需要即時驗證或對 value 進行操作, 主要分為兩種
 
-- 使用 `useContext` 來集中管理和記錄 表單 `state` 和 `errors`
-- 在表單 onChange 時及時驗證資料，並將 `errors` 即時更新到 `context` 上
-- 動態新增/刪除表單時將資料模板新增/刪除到表單的 `state` 和 `errors` 中
+- 透過 useState 或 useReducer 紀錄表單的狀態和 errors
+- 用 ref 綁定表單，在 submit 的時候才去取得表單值
+
+其餘就是處理表單的各種狀態，更複雜的處理方式會參考 `react-hook-form` 的設計架構
 
 ### 基本功能
 
@@ -57,10 +58,10 @@
 ## Demo
 
 ![](https://github.com/user-attachments/assets/162e7b22-5be9-4aea-9a02-57184d00e09b)
+
 - 年齡區間測試
 
 ![螢幕錄製 2024-10-11 下午4 23 22](https://github.com/user-attachments/assets/fbfb2c8d-944e-49ae-9b55-eb951f1fe7d5)
+
 - 新增按鈕滿足所有須間會 disable 按鈕
-- price沒有輸入會出現錯誤
-
-
+- price 沒有輸入會出現錯誤
