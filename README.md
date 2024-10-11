@@ -39,7 +39,7 @@
 - 顯示票價輸入元件，輸入時自動換成千分位
 - 針對打字到一半不被干擾的特殊情況使用 `onBlur` 時會將結果為小數點 & 0 開頭的結果做處理
 
-#### 🍀 [AgeGroupSelect](https://github.com/momi329/uwawauwa/blob/main/src/utils/utils.ts)
+#### 🍀 [AgeGroupSelect]([https://github.com/momi329/uwawauwa/blob/main/src/components/AgeGroupPriceList/AgeGroupSelect.tsx]
 
 - 顯示年齡區間元件
 
