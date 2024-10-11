@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { InputLabel } from "../../ui/InputLabel";
-import { addComma } from "../../utils/utils";
+import { addComma, removeComma } from "../../utils/utils";
 
 type PriceInputProps = {
   isError: boolean;
@@ -11,33 +11,36 @@ type PriceInputProps = {
 export const PriceInput = ({ isError, onChange, name }: PriceInputProps) => {
   const [value, setValue] = useState("0");
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let val = e.target.value.replace(/,/g, "");
-
-    if (!isValidInput(val)) return;
-
-    if (val !== "") {
-      val = addComma(val);
-    }
-    setValue(val);
-  };
-
-  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let val = e.target.value;
-    // 如果最後結尾是小數點，移除小數點
+  const cleanUpValue = (val: string) => {
     const isDecimalTyping = val.endsWith(".");
     if (isDecimalTyping) {
       val = val.slice(0, -1);
     }
+
     // 如果最後開頭是0，移除開頭的0
     val = val.replace(/^0+(?=\d)/, "");
-    setValue(addComma(val));
+    val = removeComma(val);
+
+    return val;
   };
 
-  useEffect(() => {
-    if (!onChange) return;
-    onChange(value);
-  }, [value, onChange]);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let val = removeComma(e.target.value);
+
+    if (!isValidInput(val)) return;
+
+    val = addComma(val);
+
+    setValue(val);
+
+    if (onChange) onChange(val);
+  };
+
+  const handleBlur = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const updatedValue = addComma(cleanUpValue(e.target.value));
+    setValue(updatedValue);
+    if (onChange) onChange(updatedValue);
+  };
 
   return (
     <InputLabel
@@ -46,7 +49,7 @@ export const PriceInput = ({ isError, onChange, name }: PriceInputProps) => {
       label="入住費用(每人每晚)"
       placeholder="請輸入費用"
       value={value}
-      onChange={handleInputChange}
+      onChange={handleChange}
       onBlur={handleBlur}
       isError={isError}
     />

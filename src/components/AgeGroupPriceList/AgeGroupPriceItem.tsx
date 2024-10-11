@@ -1,41 +1,32 @@
-import { Controller, FieldErrors, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import type { ResultType } from ".";
 import { AGE_RANGE_MAX, AGE_RANGE_MIN } from "../../constants";
+import { hasOverlap } from "../../helper/validations";
 import { getNumberIntervals } from "../../utils/utils";
 import { AgeGroupSelect } from "./AgeGroupSelect";
 import { FormError } from "./FormError";
 import { PriceInput } from "./PriceInput";
 
-export const AgeGroupPriceItem = ({ index }: { index: number }) => {
+type AgeGroupPriceItemProps = {
+  index: number;
+};
+
+export const AgeGroupPriceItem = ({ index }: AgeGroupPriceItemProps) => {
   const {
     control,
     trigger,
     getValues,
     formState: { errors },
-  } = useFormContext();
+  } = useFormContext<{ AgeGroupPriceList: ResultType[] }>();
 
-  const fieldErrors = (
-    errors as FieldErrors<{ AgeGroupPriceList: ResultType[] }>
-  )?.AgeGroupPriceList?.[index as number];
+  const fieldErrors = errors?.AgeGroupPriceList?.[index];
 
-  const validateOverlap = (value: [number, number]) => {
+  const isAgeGroupValid = (value: [number, number]) => {
     const { overlap } = getNumberIntervals(
-      getValues("AgeGroupPriceList").map((item: ResultType) => item.ageGroup),
+      getValues("AgeGroupPriceList").map((item) => item.ageGroup),
       { max: AGE_RANGE_MAX, min: AGE_RANGE_MIN }
     );
-
-    const isOverlap = (minValue: number, maxValue: number) => {
-      if (overlap.length === 0) return false;
-      let result = false;
-      overlap.forEach(([min, max]) => {
-        if (minValue < min && maxValue < min) return;
-        if (minValue > max && maxValue > max) return;
-        result = true;
-      });
-      return result;
-    };
-
-    return !isOverlap(value[0], value[1]) || "年齡區間重疊";
+    return !hasOverlap(overlap, value);
   };
 
   return (
@@ -50,7 +41,7 @@ export const AgeGroupPriceItem = ({ index }: { index: number }) => {
             control={control}
             name={`AgeGroupPriceList.${index}.ageGroup`}
             rules={{
-              validate: (value) => validateOverlap(value),
+              validate: (value) => isAgeGroupValid(value) || "年齡區間重疊",
             }}
             render={({ field: { onChange } }) => (
               <>
