@@ -6,7 +6,7 @@ import { AppendButton } from "./AppendButton";
 import { RemoveButton } from "./RemoveButton";
 
 type AgeGroupPriceListProps = {
-  onChange: (result: any) => void;
+  onChange: (result: ResultType[]) => void;
 };
 
 export type ResultType = {
