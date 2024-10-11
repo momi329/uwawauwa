@@ -6,7 +6,7 @@ import { Label } from "./Label";
 type InputProps = React.ComponentPropsWithoutRef<"input"> & {
   label: string;
   curr?: string;
-  errorMsg?: string;
+  isError?: boolean;
   name: string;
 };
 
@@ -20,26 +20,26 @@ export const Input = ({
   className,
   onChange,
   onKeyDown,
-  errorMsg = "錯了",
+  isError,
   ...props
 }: InputProps) => {
   return (
     <>
       <Label label={label} name={name} />
       <div
-        className="h-10 w-full rounded border border-gray-300 text-gray-500
+        className="h-10 w-full rounded  text-gray-500
       flex flex-row "
       >
         <div
-          className=" w-16 h-full bg-gray-200 rounded-l 
+          className=" w-16 h-full bg-gray-200 rounded-l border border-gray-300 border-r-0
         text-xs flex items-center justify-center "
         >
           {curr}
         </div>
         <input
           className={cn(
-            " p-2 size-full rounded-r outline-1 placeholder:text-sm",
-            errorMsg && "border-[#F78E70]"
+            " p-2 size-full rounded-r outline-1 placeholder:text-sm border border-gray-300 focus:bg-zinc-50",
+            { " border-[#F78E70]": isError }
           )}
           placeholder={placeholder}
           type={type}

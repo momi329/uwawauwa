@@ -1,4 +1,4 @@
-import { AgeGroupPriceList } from "./components/AgeGroupPriceList";
+import { AgeGroupPriceList } from "./components/AgeGroupPrice";
 
 function App() {
   return (

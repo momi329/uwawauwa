@@ -1,8 +1,8 @@
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import { cn } from "../helper/cn";
-import { CrossIcon } from "../ui/icons/CrossIcon";
-import { getNumberIntervals } from "../utils/utils";
+import { getNumberIntervals } from "../../utils/utils";
 import { AgeGroupPriceItem } from "./AgeGroupPriceItem";
+import { AppendButton } from "./AppendButton";
+import { RemoveButton } from "./RemoveButton";
 
 type AgeGroupPriceListProps = {
   onChange: (result: any) => void;
@@ -36,12 +36,15 @@ export const AgeGroupPriceList = ({ onChange }: AgeGroupPriceListProps) => {
   return (
     <FormProvider {...methods}>
       <form
-        onChange={() => onChange(getValues("AgeGroupPriceList"))}
+        onChange={() => {
+          let result = getValues("AgeGroupPriceList");
+          onChange(result);
+        }}
         className="flex flex-col gap-2 *:border-b *:pb-3 border-gray-100"
       >
         {fields.map((field, index) => (
-          <div className="relative">
-            <AgeGroupPriceItem key={field.id} index={index} />
+          <div className="relative" key={field.id}>
+            <AgeGroupPriceItem index={index} />
             {index > 0 && <RemoveButton onClick={() => remove(index)} />}
           </div>
         ))}
@@ -51,39 +54,5 @@ export const AgeGroupPriceList = ({ onChange }: AgeGroupPriceListProps) => {
         disabled={isDisabled}
       />
     </FormProvider>
-  );
-};
-
-export const AppendButton = ({
-  onClick,
-  disabled = false,
-}: {
-  onClick: () => void;
-  disabled?: boolean;
-}) => {
-  return (
-    <button
-      type="button"
-      className={cn(
-        "mr-auto text-sm text-teal-500 cursor-pointer active:text-teal-600",
-        { "text-gray-400 cursor-not-allowed": disabled }
-      )}
-      disabled={disabled}
-      onClick={onClick}
-    >
-      <span className="text-xl ">+</span> 新增價格設定
-    </button>
-  );
-};
-
-export const RemoveButton = ({ onClick }: { onClick: () => void }) => {
-  return (
-    <button
-      type="button"
-      className="absolute top-1 right-0 text-xs text-[#F78E70] cursor-pointer flex flex-row p-1"
-      onClick={onClick}
-    >
-      <CrossIcon color="#F78E70" size={16} /> 移除
-    </button>
   );
 };

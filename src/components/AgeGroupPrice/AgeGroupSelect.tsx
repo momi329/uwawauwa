@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { Label } from "../ui/Label";
-import { Select } from "../ui/Select";
+import { cn } from "../../helper/cn";
+import { Label } from "../../ui/Label";
+import { Select } from "../../ui/Select";
 
 type AgeGroupSelectProps = {
   min: number;
   max: number;
   label: string;
+  isError: boolean;
   onChange?: (value: [number, number]) => void;
 };
 
@@ -13,6 +15,7 @@ export const AgeGroupSelect = ({
   min,
   max,
   label = "年齡",
+  isError,
   onChange,
 }: AgeGroupSelectProps) => {
   const [value, setValue] = useState<[number, number]>([min, max]);
@@ -42,11 +45,14 @@ export const AgeGroupSelect = ({
   }, [value]);
 
   return (
-    <div className="w-min-[280px] h-fit flex flex-col items-start p-1">
+    <div className="w-min-[280px] h-fit flex flex-col items-start ">
       <Label label={label} name="ageGroupSelect" />
       <div className="rounded text-sm text-gray-500 w-full  h-10 flex justify-between ">
         <Select
-          className="border-r-1 rounded-r-none"
+          className={cn(
+            "border-r-1 rounded-r-none",
+            isError && "border-[#F78E70]"
+          )}
           selectOptions={minOptions}
           value={minVal}
           onChange={(e) => handleChange("min", e)}
@@ -55,7 +61,10 @@ export const AgeGroupSelect = ({
           ~
         </div>
         <Select
-          className="rounded-l-none border-l-1"
+          className={cn(
+            "rounded-l-none border-l-1",
+            isError && "border-[#F78E70]"
+          )}
           selectOptions={maxOptions}
           value={maxVal}
           onChange={(e) => handleChange("max", e)}
