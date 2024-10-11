@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { InputLabel } from "../../ui/InputLabel";
 import { addComma } from "../../utils/utils";
+
 type PriceInputProps = {
   isError: boolean;
   onChange: (value: string) => void;

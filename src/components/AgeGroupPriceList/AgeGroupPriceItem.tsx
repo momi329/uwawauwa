@@ -1,5 +1,5 @@
 import { Controller, FieldErrors, useFormContext } from "react-hook-form";
-import { ResultType } from ".";
+import type { ResultType } from ".";
 import { AGE_RANGE_MAX, AGE_RANGE_MIN } from "../../constants";
 import { getNumberIntervals } from "../../utils/utils";
 import { AgeGroupSelect } from "./AgeGroupSelect";

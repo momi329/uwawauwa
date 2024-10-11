@@ -1,4 +1,4 @@
-import { addComma, getNumberIntervals } from "../src/utils/utils";
+import { addComma, getNumberIntervals } from "../utils";
 
 describe("getNumberIntervals", () => {
   test("handles overlapping and not included intervals", () => {
