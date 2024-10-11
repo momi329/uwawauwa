@@ -53,3 +53,12 @@
 - 滿足所有須間會 disable 按鈕
 
 ## Demo
+
+![](https://github.com/user-attachments/assets/162e7b22-5be9-4aea-9a02-57184d00e09b)
+- 年齡區間測試
+
+![螢幕錄製 2024-10-11 下午4 23 22](https://github.com/user-attachments/assets/fbfb2c8d-944e-49ae-9b55-eb951f1fe7d5)
+- 新增按鈕滿足所有須間會 disable 按鈕
+- price沒有輸入會出現錯誤
+
+
