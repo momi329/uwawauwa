@@ -38,7 +38,7 @@ export const Input = ({
         </div>
         <input
           className={cn(
-            "  p-2 size-full rounded-r outline-1 placeholder:text-sm",
+            " p-2 size-full rounded-r outline-1 placeholder:text-sm",
             errorMsg && "border-[#F78E70]"
           )}
           placeholder={placeholder}

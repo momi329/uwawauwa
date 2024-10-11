@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Label } from "../ui/Label";
 import { Select } from "../ui/Select";
 
@@ -6,20 +6,23 @@ type AgeGroupSelectProps = {
   min: number;
   max: number;
   label: string;
+  onChange?: (value: [number, number]) => void;
 };
 
 export const AgeGroupSelect = ({
   min,
   max,
   label = "年齡",
+  onChange,
 }: AgeGroupSelectProps) => {
-  const [value, setValue] = useState({ min, max });
+  const [value, setValue] = useState<[number, number]>([min, max]);
+  const [minVal, maxVal] = value;
 
-  const minOptions = Array.from({ length: value.max - min + 1 }, (_, i) =>
+  const minOptions = Array.from({ length: maxVal - min + 1 }, (_, i) =>
     (min + i).toString()
   );
-  const maxOptions = Array.from({ length: max - value.min + 1 }, (_, i) =>
-    (value.min + i).toString()
+  const maxOptions = Array.from({ length: max - minVal + 1 }, (_, i) =>
+    (minVal + i).toString()
   );
 
   const handleChange = (
@@ -27,11 +30,16 @@ export const AgeGroupSelect = ({
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
     if (type === "min") {
-      setValue({ ...value, min: +e.target.value });
+      setValue([+e.target.value, maxVal]);
     } else {
-      setValue({ ...value, max: +e.target.value });
+      setValue([minVal, +e.target.value]);
     }
   };
+
+  useEffect(() => {
+    if (!onChange) return;
+    onChange(value);
+  }, [value]);
 
   return (
     <div className="w-min-[280px] h-fit flex flex-col items-start p-1">
@@ -40,7 +48,7 @@ export const AgeGroupSelect = ({
         <Select
           className="border-r-1 rounded-r-none"
           selectOptions={minOptions}
-          value={value.min}
+          value={minVal}
           onChange={(e) => handleChange("min", e)}
         />
         <div className="flex items-center justify-center text-gray-500 bg-gray-200 text-center w-1/6 h-full ">
@@ -49,7 +57,7 @@ export const AgeGroupSelect = ({
         <Select
           className="rounded-l-none border-l-1"
           selectOptions={maxOptions}
-          value={value.max}
+          value={maxVal}
           onChange={(e) => handleChange("max", e)}
         />
       </div>
